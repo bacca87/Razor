@@ -84,7 +84,8 @@ namespace Assistant
 
         public bool AllowBit(int bit)
         {
-            return (m_Features & (1U << bit)) == 0;
+            return true;
+            //return (m_Features & (1U << bit)) == 0;
         }
 
         public void SetFeatures(ulong features)
