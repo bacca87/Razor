@@ -265,6 +265,7 @@ namespace Assistant.Scripts
                 {
                     list.AddRange(World.FindItemsByName(gfxStr).Where(item =>
                         !item.IsInBank && (Utility.InRange(World.Player.Position, item.Position, 2) ||
+                                           (item.RootContainer != null && item.RootContainer is UOEntity && Utility.InRange(World.Player.Position, (item.RootContainer as UOEntity).Position, 2)) ||
                                            item.RootContainer == World.Player)).ToList());
                 }
                 else
