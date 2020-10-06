@@ -723,7 +723,7 @@ namespace Assistant
                 int dist = Utility.Distance(item.GetWorldPosition(), Position);
                 if (item != DragDropManager.Holding && (dist > MultiVisRange || (!item.IsMulti && dist > VisRange)))
                     item.Remove();
-                else if (!IsGhost && Visible && dist <= 2 && s.Enabled && item.Movable)
+                else if (!IsGhost && dist <= 2 && s.Enabled && item.Movable)
                     s.Scavenge(item);
             }
 

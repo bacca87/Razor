@@ -134,7 +134,9 @@ namespace Assistant.Scripts
 
                 if (inRangeCheck)
                 {
-                    if (Utility.InRange(World.Player.Position, i.Position, 2) || i.RootContainer == World.Player)
+                    if (Utility.InRange(World.Player.Position, i.Position, 2) ||
+                        (i.RootContainer != null && i.RootContainer is UOEntity && Utility.InRange(World.Player.Position, (i.RootContainer as UOEntity).Position, 2)) ||
+                        i.RootContainer == World.Player)
                         return true;
                 }
                 else

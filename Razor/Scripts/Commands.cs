@@ -327,7 +327,8 @@ namespace Assistant.Scripts
                         list.AddRange(World.Items.Values.Where(i =>
                                 i.ItemID == gfx && !i.IsInBank &&
                                 (Utility.InRange(World.Player.Position, i.Position, 2) ||
-                                 i.RootContainer == World.Player))
+                                    (i.RootContainer != null && i.RootContainer is UOEntity && Utility.InRange(World.Player.Position, (i.RootContainer as UOEntity).Position, 2)) ||
+                                        i.RootContainer == World.Player))
                             .ToList());
                     }
                     else
@@ -586,7 +587,8 @@ namespace Assistant.Scripts
                 {
                     items.AddRange(World.FindItemsByName(gfxStr).Where(item =>
                         !item.IsInBank && (Utility.InRange(World.Player.Position, item.Position, 2) ||
-                                           item.RootContainer == World.Player)).ToList());
+                            (item.RootContainer != null && item.RootContainer is UOEntity && Utility.InRange(World.Player.Position, (item.RootContainer as UOEntity).Position, 2)) ||
+                                item.RootContainer == World.Player)).ToList());
                 }
                 else
                 {
@@ -641,7 +643,8 @@ namespace Assistant.Scripts
                         {
                             if (inRangeCheck)
                             {
-                                if (Utility.InRange(World.Player.Position, i.Position, 2))
+                                if (Utility.InRange(World.Player.Position, i.Position, 2) ||
+                                    (i.RootContainer != null && i.RootContainer is UOEntity && Utility.InRange(World.Player.Position, (i.RootContainer as UOEntity).Position, 2)))
                                     items.Add(i);
                             }
                             else
