@@ -90,7 +90,7 @@ namespace Assistant.Scripts
             Interpreter.RegisterCommandHandler("headmsg", HeadMsg); //OverheadMessageAction
             Interpreter.RegisterCommandHandler("sysmsg", SysMsg); //SystemMessageAction
             Interpreter.RegisterCommandHandler("clearsysmsg", ClearSysMsg); //SystemMessageAction
-            Interpreter.RegisterCommandHandler("clearjournal", ClearSysMsg); //SystemMessageAction
+            Interpreter.RegisterCommandHandler("clearjournal", ClearJournalMsg); //SystemMessageAction
 
             // General Waits/Pauses
             Interpreter.RegisterCommandHandler("wait", Pause); //PauseAction
@@ -1052,6 +1052,13 @@ namespace Assistant.Scripts
         public static bool ClearSysMsg(string command, Argument[] args, bool quiet, bool force)
         {
             PacketHandlers.SysMessages.Clear();
+
+            return true;
+        }
+
+        public static bool ClearJournalMsg(string command, Argument[] args, bool quiet, bool force)
+        {
+            PacketHandlers.JournalMessages.Clear();
 
             return true;
         }

@@ -893,6 +893,11 @@ namespace Assistant
                 if (PacketHandlers.SysMessages.Count >= 25)
                     PacketHandlers.SysMessages.RemoveRange(0, 10);
 
+                PacketHandlers.JournalMessages.Add(text);
+
+                if (PacketHandlers.JournalMessages.Count >= 25)
+                    PacketHandlers.JournalMessages.RemoveRange(0, 10);
+
                 if (Config.GetBool("FilterRazorMessages"))
                 {
                     if (!MessageQueue.Enqueue(0xFFFFFFFF, null, 0, MessageType.Regular, (ushort) hue, 3,

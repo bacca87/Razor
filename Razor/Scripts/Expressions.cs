@@ -60,6 +60,9 @@ namespace Assistant.Scripts
             Interpreter.RegisterExpressionHandler("insysmsg", InSysMessage);
             Interpreter.RegisterExpressionHandler("insysmessage", InSysMessage);
 
+            Interpreter.RegisterExpressionHandler("injournalmsg", InJournalMessage);
+            Interpreter.RegisterExpressionHandler("injournalmessage", InJournalMessage);
+
             Interpreter.RegisterExpressionHandler("findtype", FindType);
         }
 
@@ -200,6 +203,29 @@ namespace Assistant.Scripts
                 if (sys.IndexOf(text, StringComparison.OrdinalIgnoreCase) != -1)
                 {
                     PacketHandlers.SysMessages.RemoveRange(0, i + 1);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool InJournalMessage(string expression, Argument[] args, bool quiet)
+        {
+            if (args.Length == 0)
+            {
+                throw new RunTimeError(null, "Usage: injournalmsg ('text')");
+            }
+
+            string text = args[0].AsString();
+
+            for (int i = PacketHandlers.JournalMessages.Count - 1; i >= 0; i--)
+            {
+                string sys = PacketHandlers.JournalMessages[i];
+
+                if (sys.IndexOf(text, StringComparison.OrdinalIgnoreCase) != -1)
+                {
+                    PacketHandlers.JournalMessages.RemoveRange(0, i + 1);
                     return true;
                 }
             }
